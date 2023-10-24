@@ -53,6 +53,8 @@ function App() {
   const ref = useRef(null);
   const switchButtons = useRef([]);
   const floorButtons = useRef([]);
+  const roomButtons = useRef([]);
+  
   function switchButtonsFunc(event) {
     switchButtons.current.forEach((el) => {
       if(el!=event.target){
@@ -71,6 +73,15 @@ function App() {
       }
     })
   }
+  function roomClickFunc(event){
+    roomButtons.current.forEach((el) => {
+      if(el!=event.target){
+        el.setAttribute('class', 'ng-star-inserted');
+      }else{
+        el.setAttribute('class', 'ng-star-inserted selected-room');
+      }
+    })
+  }
   useEffect(() => {
     const roomsParent = document.querySelector(".wrapper");
     const rooms = [...document.querySelectorAll("g.ng-star-inserted")];
@@ -82,6 +93,7 @@ function App() {
     const roomHumidity = document.querySelector(".room-humidity");
     const roomWorkload = document.querySelector(".room-workload");
     const roomCapacity = document.querySelector(".room-capacity");
+    /*
     rooms.forEach((x) => {
       x.addEventListener("click", (event) => {
         if (active === null) {
@@ -97,7 +109,7 @@ function App() {
         
       })
     });
-    
+    */
     
     for(let i =0; i<rooms.length; i++){
       console.log(rooms[i])
@@ -662,7 +674,7 @@ function App() {
             ></path>
            
           </g>
-          <g _ngcontent-qir-c274="" id="0" className="ng-star-inserted">
+          <g _ngcontent-qir-c274="" id="0" className="ng-star-inserted" ref={(element) => {roomButtons.current[0] = element}} onClick={roomClickFunc}>
             <path
               _ngcontent-qir-c274=""
               className="room-bg"
@@ -688,7 +700,7 @@ function App() {
               Kitchen
             </text>
           </g>
-          <g _ngcontent-qir-c274="" id="1" className="ng-star-inserted">
+          <g _ngcontent-qir-c274="" id="1" className="ng-star-inserted" ref={(element) => {roomButtons.current[1] = element}} onClick={roomClickFunc}>
             <path
               _ngcontent-qir-c274=""
               className="room-bg"
@@ -709,7 +721,7 @@ function App() {
               Bedroom
             </text>
           </g>
-          <g _ngcontent-qir-c274="" id="3" className="ng-star-inserted">
+          <g _ngcontent-qir-c274="" id="3" className="ng-star-inserted" ref={(element) => {roomButtons.current[2] = element}} onClick={roomClickFunc}>
             <path
               _ngcontent-qir-c274=""
               className="room-bg"
@@ -735,7 +747,7 @@ function App() {
               Hallway
             </text>
           </g>
-          <g _ngcontent-qir-c274="" className="ng-star-inserted" id="2">
+          <g _ngcontent-qir-c274="" className="ng-star-inserted"  id="2" ref={(element) => {roomButtons.current[3] = element}} onClick={roomClickFunc}>
             <path
               _ngcontent-qir-c274=""
               className="room-bg"

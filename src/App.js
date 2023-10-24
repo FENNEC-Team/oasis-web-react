@@ -51,12 +51,16 @@ cards[4] = {
 
 function App() {
   const ref = useRef(null);
-  const switchButtons = useRef(null);
-  const [switchButton, setSwitchButton] = React.useState(0);
-  const switchButtonClasses = "switch-buttons reservation-button switch";
+  const switchButtons = useRef([]);
   function switchButtonsFunc(event) {
-    setSwitchButton(!switchButton);
-    event.target.classList.add('switch');
+    switchButtons.current.forEach((el) => {
+      if(el!=event.target){
+        el.className="switch-buttons"
+      }else{
+        el.className="switch switch-buttons";
+      }
+    })
+    
   }
   useEffect(() => {
     const roomsParent = document.querySelector(".wrapper");
@@ -168,9 +172,9 @@ function App() {
     <main style={{opacity: "0"}}>
       <h1>Карта офиса</h1>
       <div className="change_option">
-        <button ref={switchButtons} className={switchButton ? "switch-buttons reservation-button" : "switch-buttons reservation-button "} onClick={switchButtonsFunc}>Бронирование</button>
+        <button ref={(element) => {switchButtons.current[0] = element}} className="switch-buttons reservation-button" onClick={switchButtonsFunc}>Бронирование</button>
 
-        <button ref={switchButtons} className={switchButton ? "switch-buttons" : "switch-buttons"} onClick={switchButtonsFunc}>Загруженность</button>
+        <button ref={(element) => {switchButtons.current[1] = element}} className="switch-buttons" onClick={switchButtonsFunc}>Загруженность</button>
       </div>
 
       <div className="map room-selector" style={{opacity: "0"}} id="map">

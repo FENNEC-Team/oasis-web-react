@@ -52,6 +52,7 @@ cards[4] = {
 function App() {
   const ref = useRef(null);
   const switchButtons = useRef([]);
+  const floorButtons = useRef([]);
   function switchButtonsFunc(event) {
     switchButtons.current.forEach((el) => {
       if(el!=event.target){
@@ -60,7 +61,15 @@ function App() {
         el.className="switch switch-buttons";
       }
     })
-    
+  }
+  function floorButtonsFunc(event) {
+    floorButtons.current.forEach((el) => {
+      if(el!=event.target){
+        el.className="floor-button-inactive"
+      }else{
+        el.className="floor-button-inactive btn_aqua";
+      }
+    })
   }
   useEffect(() => {
     const roomsParent = document.querySelector(".wrapper");
@@ -112,27 +121,6 @@ function App() {
       });
     }
    
-    const floorButtons = [...document.querySelectorAll(".floor-button-inactive")];
-    floorButtons.forEach((x) =>
-      x.addEventListener("click", (event) => {
-        floorButtons.forEach((x) =>
-          x.classNameList.remove("btn_aqua")
-        );
-          active = x;
-          active.classNameList.toggle("btn_aqua");
-      })
-    );
-    /*
-    switchButton[0].forEach((x) =>
-      x.addEventListener("click", (event) => {
-        switchButton[0].forEach((x) =>
-          switchButton.classNameList.remove("switch")
-        );
-          active = x;
-          active.classNameList.toggle("switch");
-      })
-    );
-    */
     const mapLetter = document.querySelector(".map-letter");
     mapLetter.addEventListener("click", (event) => {
       document.querySelector("main").style.opacity = 1;
@@ -779,9 +767,9 @@ function App() {
 
       <div className="floor" style={{opacity: "0"}}>
         <div style={{textAlign: "center"}}>Этажи</div>
-        <div style={{textAlign: "center"}} className="floor-button-inactive">1</div>
-        <div style={{textAlign: "center"}} className="floor-button-inactive">2</div>
-        <div style={{textAlign: "center"}} className="floor-button-inactive">3</div>
+        <div style={{textAlign: "center"}} onClick={floorButtonsFunc} ref={(element) => {floorButtons.current[0] = element}} className="floor-button-inactive">1</div>
+        <div style={{textAlign: "center"}} onClick={floorButtonsFunc} ref={(element) => {floorButtons.current[1] = element}}className="floor-button-inactive">2</div>
+        <div style={{textAlign: "center"}} onClick={floorButtonsFunc} ref={(element) => {floorButtons.current[2] = element}}className="floor-button-inactive">3</div>
       </div>
 
       <div className="room" style={{opacity: "0"}}>

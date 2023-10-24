@@ -812,7 +812,7 @@ function App() {
             </div>
           </div>
           <form action="">
-            <button className="reserve btn_reserve">Забронировать</button>
+            <button className="reserve btn_reserve">пушка</button>
           </form>
         </div>
       </div>
